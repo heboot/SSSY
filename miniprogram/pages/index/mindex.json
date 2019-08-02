@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "home": "/pages/home/home",
+    "register": "/pages/register/register",
     "my": "/pages/my/my"
   }
 }
