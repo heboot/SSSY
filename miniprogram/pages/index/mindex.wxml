@@ -1,0 +1,24 @@
+<home wx:if="{{PageCur=='home'}}"></home>
+<my wx:if="{{PageCur=='my'}}"></my>
+<register wx:if="{{PageCur=='register'}}"></register>
+<!-- <about wx:if="{{PageCur=='about'}}"></about> --> 
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="home">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='home'?'text-green':'text-gray'}}">首页</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="register">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/component{{PageCur=='register'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='register'?'text-green':'text-gray'}}">活动</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="my">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/plugin{{PageCur=='my'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='my'?'text-green':'text-gray'}}">我的</view>
+  </view>
+</view>
