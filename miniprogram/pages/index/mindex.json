@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "home": "/pages/home/home",
+    "aaa": "/pages/home/aaa",
     "my": "/pages/my/my",
     "register": "/pages/register/register"
   }
