@@ -1,4 +1,8 @@
-<swiper class="screen-swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">轮播图</view>
+</cu-custom>
+<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
   <swiper-item wx:for="{{swiperList}}" wx:key>
     <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
     <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
