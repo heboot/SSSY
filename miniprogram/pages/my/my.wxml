@@ -49,4 +49,26 @@
     </view>
   </view>
   <view class="cu-tabbar-height"></view>
+
+  <view class="cu-modal {{showView?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">提醒</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding-xl">
+        您还没有成为我们的会员，
+        现在加入即可享受更多优惠。
+      </view>
+       
+      <view class="cu-bar bg-white justify-end">
+        <view class="action">
+          <button class="cu-btn line-green text-green" bindtap="hideModal">我再想想</button>
+          <button class="cu-btn bg-green margin-left" bindtap="hideModal">加入</button>
+        </view>
+      </view>
+    </view>
+  </view>
 </scroll-view>

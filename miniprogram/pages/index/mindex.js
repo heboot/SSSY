@@ -13,5 +13,5 @@ Page({
       imageUrl: '/images/share.jpg',
       path: '/pages/index/index'
     }
-  },
+  }
 })
