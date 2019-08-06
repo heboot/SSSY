@@ -1,0 +1,152 @@
+<view class="app_web_container">
+  <view class="pyqcontainer">
+
+    <image class="avatar_img" src="../images/Hlogo.png"></image>
+
+    <view class="pyqcontainer_content">
+
+      <view class="pyqcontainer_name">
+        <text>Heboot</text>
+      </view>
+
+      <view class="pyqcontainer_content_summary">
+        <text>各个平台都拿手(android,iOS,linux)</text>
+      </view>
+      <view class="pyqcontainer_content_summary">
+        <text>强大的开发能力，科技生活，不止于APP</text>
+      </view>
+      <view class="pyqcontainer_content_summary">
+        <text>全天候数据监测，随时应你所需</text>
+      </view>
+      <view class="pyqcontainer_content_summary">
+        <text>专业的事情，交给专业的我们</text>
+      </view>
+      <view class="pyqcontainer_content_summary">
+        <text>HStudio,专注于互联网软件研发，专业、极致，解你所难</text>
+      </view>
+      <view class="pyqcontainer_content_summary">
+        <text>也许是中原地区最6的软件开发服务提供者</text>
+      </view>
+
+      <view class="pyqcontainer_content_photo">
+        <image mode="aspectFill" data-path="1" class="content_photo_img" src="../images/pc1.jpg" bindtap="picTap"></image>
+        <image bindtap="picTap" data-path="2" class="content_photo_img" src="../images/t1.jpg"></image>
+        <image bindtap="picTap" data-path="3" class="content_photo_img" src="../images/t2.jpg"></image>
+      </view>
+
+      <view class="pyqcontainer_content_photo">
+        <image bindtap="picTap" data-path="4" mode="aspectFill" class="content_photo_img" src="../images/pc5.jpg"></image>
+        <image bindtap="picTap" data-path="5" class="content_photo_img" src="../images/pc2.jpg"></image>
+        <image bindtap="picTap" data-path="6" mode="aspectFill" class="content_photo_img" src="../images/pc6.jpg"></image>
+
+      </view>
+      <view class="pyqcontainer_time">
+        <text>刚刚</text>
+      </view>
+
+      <view class="r"></view>
+      <view class="cmt-wrap">
+        <view class="like">
+          <image src="../images/l.png"></image>外援曾哥，上海JR科技，上海有码科技，上海大众科技，郑州立方科技，深圳富阔科技，郑州博博科技...</view>
+
+        <view class="cmt-list">
+          <view>
+            <p><span>外援曾哥：</span>上次那个功能做的真不错～可以让我借鉴下</p>
+          </view>
+          <view>
+            <p><span>上海JR科技：</span>APP做的不错，老客户了！</p>
+          </view>
+          <view>
+            <p><span>上海有码科技：</span>APP的第一个版本就交给你们，让我们很满意</p>
+          </view>
+          <view>
+            <p><span>大表哥：</span>你说的这这些都啥意思？</p>
+          </view>
+
+          <view>
+            <p><span>小白隆：</span>大哥可以教我做APP吗</p>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="pyqcontainer">
+
+    <image class="avatar_img" src="../images/Hlogo.png"></image>
+
+    <view class="pyqcontainer_content">
+
+      <view class="pyqcontainer_name">
+        <text>Heboot</text>
+      </view>
+
+      <view class="pyqcontainer_content_summary">
+        <text>先进的生产工具</text>
+      </view>
+      <view class="pyqcontainer_content_summary">
+        <text>每行代码都牢牢把控</text>
+      </view>
+      <view class="pyqcontainer_content_summary">
+        <text>每个像素都井井有条</text>
+      </view>
+
+      <view class="pyqcontainer_content_photo">
+        <image bindtap="picTap2"  data-path="1" mode="aspectFill" class="content_photo_img" src="../images/pc1.jpg"></image>
+        <image bindtap="picTap2"  data-path="2" mode="aspectFill" class="content_photo_img" src="../images/pc2.jpg"></image>
+        <image bindtap="picTap2"  data-path="3" class="content_photo_img" src="../images/t2.jpg"></image>
+
+      </view>
+
+      <view class="pyqcontainer_content_photo">
+        <image bindtap="picTap2"  data-path="4" class="content_photo_img" src="../images/t3.jpg"></image>
+        <image bindtap="picTap2"  data-path="5" mode="aspectFill" class="content_photo_img" src="../images/pc3.png"></image>
+        <image bindtap="picTap2"  data-path="6" mode="aspectFill" class="content_photo_img" src="../images/pc4.jpg"></image>
+
+      </view>
+      <view class="pyqcontainer_time">
+        <text>刚刚</text>
+      </view>
+
+      <view class="r"></view>
+      <view class="cmt-wrap">
+        <view class="like">
+          <image src="../images/l.png"></image>外援曾哥，技术部小何，移动事业部老何，开发部何小，产品部何何...</view>
+
+        <view class="cmt-list">
+          <view>
+            <p><span>外援曾哥：</span>666，简直炸裂～</p>
+          </view>
+          <view>
+            <p><span>阿里事业部L：</span>工欲利其事必先利其器！小伙子干得不错！</p>
+          </view>
+          <view>
+            <p><span>小白隆：</span>哇！好厉害！全MAC加戴尔外显～那个曲面显示器NB</p>
+          </view>
+          <view>
+            <p><span>大表哥：</span>还招人不？</p>
+          </view>
+          <view>
+            <p>
+              <span class="data-name">大表哥</span> 回复
+              <span>
+										小白隆
+									</span>
+              <span>
+										：
+									</span> 就你懂的多？
+            </p>
+          </view>
+          <view>
+            <p><span>产品部何何：</span>😘今晚开会改需求～</p>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+
+</view>

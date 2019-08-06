@@ -3,7 +3,8 @@ Component({
     addGlobalClass: true,
   },
   data: {
-     
+    picker: ['喵喵喵', '汪汪汪', '哼唧哼唧'],
+    date: '2018-12-25',
   },
   methods:{
     PickerChange(e) {
