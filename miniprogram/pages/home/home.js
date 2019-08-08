@@ -27,6 +27,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    //事件处理函数
+    toAbout: function () {
+      wx.navigateTo({
+        url: '../about/about'
+      })
+    },
     onLoad() {
       this.towerSwiper('swiperList');
       // 初始化towerSwiper 传已有的数组名即可

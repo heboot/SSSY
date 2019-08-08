@@ -1,9 +1,9 @@
-Component({
+Page({
   options: {
     addGlobalClass: true,
   },
   data: {
-    picker: ['喵喵喵', '汪汪汪', '哼唧哼唧'],
+    picker: ['男', '女'],
     date: '2018-12-25',
   },
   methods:{

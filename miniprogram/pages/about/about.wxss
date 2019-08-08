@@ -22,8 +22,9 @@
 .pyqcontainer_content_photo {
   margin-top: 10rpx;
   
-}
 
+  
+}
 .pyqcontainer_content {
   margin-left: 20rpx;
   display: block;
@@ -60,6 +61,14 @@
   width: 150rpx;
   height: 150rpx;
 }
+
+.content_photo_img_big{
+  margin-top: 20rpx;
+   margin-right: 10rpx;
+  width: 400rpx;
+  height:250rpx;
+}
+
 
 .cmt-wrap {
   font-size: 24rpx;

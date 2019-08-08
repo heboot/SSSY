@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-pink" isBack="{{false}}">
   <view slot="backText">返回</view>
-  <view slot="content">你来了</view>
+  <view slot="content">水生照相馆</view>
 </cu-custom>
 <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
   <swiper-item wx:for="{{swiperList}}" wx:key>
@@ -35,10 +35,10 @@
       <view class="margin-top-sm text-Abc">专业，贴心</view>
     </view>
   </view>
-  <view class="padding-sm">
+  <view class="padding-sm" bindtap="toAbout">
     <view class="bg-gradual-blue padding radius text-center shadow-blur">
       <view class="text-lg">关于</view>
-      <view class="margin-top-sm text-Abc">关于我们</view>
+      <view class="margin-top-sm text-Abc">点我就对了</view>
     </view>
   </view>
 </view>
