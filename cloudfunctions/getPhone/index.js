@@ -23,7 +23,7 @@ exports.main = async (event, context) => {
 
     qs: {
       appid:wxContext.APPID,
-      secret:'xxxxxxxxxxxxxxxxxxx',  // 微信开发后台可生成，唯有微信认证过的国内主体才可有
+      secret:'493f3ed3d884a2489ff68e3f95c5d660',  // 微信开发后台可生成，唯有微信认证过的国内主体才可有
       grant_type: 'authorization_code',
       js_code: event.sessionCode // 小程序中获取过来的
     },
@@ -31,6 +31,6 @@ exports.main = async (event, context) => {
   };
   const resultValue = await requestpromise(AccessToken_options);
   const pc = new WXBizDataCrypt(appid, resultValue.session_key)  // -解密第一步
-  const data = pc.decryptData(event.encryptedData, event.iv)   // 解密第二步
+  const data = pc.decryptData(event.encryptedData, event.iv)  // 解密第二步 pc.decryptData(event.encryptedData, event.iv)  
   return { data }
 }

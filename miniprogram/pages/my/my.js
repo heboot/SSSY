@@ -72,8 +72,7 @@ Component({
           //查询云数据库有没有openId为当前登陆者的记录 如果有，则绑定过手机号
           const tbUser = db.collection('tb_user').where({
             wx_code: _.eq(res.result.userInfo.openId)
-          })
-            .get({
+          }).get({
               success: function (res) {
                 console.log("query ok" + res.data)
                 if (res.data == null || res.data.length == 0) {
@@ -112,6 +111,16 @@ Component({
 
       console.log(e)
       
+      wx.cloud.callFunction({
+        name: 'getPhone',
+        data:{
+          encryptedData: e.detail.encryptedData,
+          iv: e.detail.iv,
+        },
+        complete: res => {
+          console.log("getP>>>" + res)
+        }
+      })
       // // 获取用户信息
       // wx.getSetting({
       //   success: res => {
