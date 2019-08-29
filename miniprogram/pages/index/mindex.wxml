@@ -9,12 +9,12 @@
     </view>
     <view class="{{PageCur=='home'?'text-pink':'text-gray'}}">首页</view>
   </view>
-  <view class="action" bindtap="NavChange" data-cur="register">
+  <!-- <view class="action" bindtap="NavChange" data-cur="register">
     <view class='cuIcon-cu-image'>
       <image src="../../images/{{PageCur=='register'?'icon_recommend_fouse':'icon_recommend_normal'}}.png"></image>
     </view>
     <view class="{{PageCur=='register'?'text-pink':'text-gray'}}">活动</view>
-  </view>
+  </view> -->
   <view class="action" bindtap="NavChange" data-cur="my">
     <view class='cuIcon-cu-image'>
       <image src="../../images/{{PageCur=='my'?'icon_my_fouse':'icon_my_normal'}}.png"></image>

@@ -1,10 +1,11 @@
 // 云函数入口文件
-
 const cloud = require('wx-server-sdk')
 
-const requestpromise = require('request-promise');
+cloud.init()
 
-var WXBizDataCrypt = require('./RdWXBizDataCrypt') // 用于手机号解密
+const requestSync = require('./requestSync')
+
+var WXBizDataCrypt = require('./WXBizDataCrypt') // 用于手机号解密
 
 cloud.init()
 
@@ -29,8 +30,9 @@ exports.main = async (event, context) => {
     },
     json: true
   };
-  const resultValue = await requestpromise(AccessToken_options);
-  const pc = new WXBizDataCrypt(appid, resultValue.session_key)  // -解密第一步
-  const data = pc.decryptData(event.encryptedData, event.iv)  // 解密第二步 pc.decryptData(event.encryptedData, event.iv)  
-  return { data }
+  const resultValue = await requestSync(AccessToken_options);
+  const pc = new WXBizDataCrypt(wxContext.APPID, resultValue.session_key)  // -解密第一步
+  const data = pc.decryptData(event.encryptedData, event.iv) // 解密第二步 pc.decryptData(event.encryptedData, event.iv)   
+  const aaa= event.sessionCode
+  return { data}
 }

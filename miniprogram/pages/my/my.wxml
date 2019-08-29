@@ -1,11 +1,11 @@
 <scroll-view scroll-y class="scrollPage">
   <view class="UCenter-bg">
     <image src="/images/logo.png" class="png" mode="widthFix"></image>
-    <view class="nick">未加入会员
+    <view wx:if="{{!isReister}}"  class="nick">未加入会员
       <!-- <text class="text-df">v2.0</text> -->
     </view>
     <view  wx:if="{{isReister}}" class="margin-top-sm">
-      <text>会员卡号</text>
+      <text>会员卡号{{vipNo}}</text>
     </view>
 
       <!-- <button  wx:if="{{!isReister}}" class="mbtn bg-pink lg" bindtap="toRegister">加入会员</button> -->

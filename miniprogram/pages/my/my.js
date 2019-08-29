@@ -8,12 +8,15 @@ Component({
     forksCount: 0,
     visitTotal: 0,
     showView: false,
-    isReister:false
+    isReister:false,
+    vipNo:null
   },
   attached: function() {
     let that = this
     wx.checkSession({
       success(res) {
+        that.vipNo = getApp().globalData.phone
+        console.log("check成功 获取code>", that.getApp().globalData.phone)
         that.doLogin()
       },
       fail() {
@@ -21,6 +24,8 @@ Component({
         wx.login({
           success(res) {
             if (res.code) {
+              console.log("登录成功 获取code>", res)
+              getApp().globalData.sessionCode = res.code
               that.doLogin(res.code)
             } else {
               console.log('登录失败！' + res.errMsg)
@@ -29,7 +34,6 @@ Component({
         })
       }
     })
-    console.log("success")
     wx.showLoading({
       title: '数据加载中',
       mask: true,
@@ -65,8 +69,9 @@ Component({
         // 需调用的云函数名
         name: 'login',
         complete:res=>{
-          console.log(res)
+        
           console.log(res.result.userInfo.openId)
+         
           const db = wx.cloud.database()
           const _ = db.command
           //查询云数据库有没有openId为当前登陆者的记录 如果有，则绑定过手机号
@@ -74,7 +79,7 @@ Component({
             wx_code: _.eq(res.result.userInfo.openId)
           }).get({
               success: function (res) {
-                console.log("query ok" + res.data)
+                console.log("query ok" + res)
                 if (res.data == null || res.data.length == 0) {
                  
                 } else {
@@ -105,6 +110,7 @@ Component({
       })
     },
     toRegister:function(e){
+      let that = this
       this.setData({
         showView: false
       })
@@ -116,10 +122,21 @@ Component({
         data:{
           encryptedData: e.detail.encryptedData,
           iv: e.detail.iv,
+          sessionCode: getApp().globalData.sessionCode
         },
-        complete: res => {
-          console.log("getP>>>" + res)
-        }
+        success: function (res) {
+        
+          that.setData({
+            isReister: true
+          })
+          that.setData({
+            vipNo: res.result.data.phoneNumber
+          })
+          getApp().globalData.phone = res.result.data.phoneNumber
+          console.log(res.result.data.phoneNumber) // 3
+        },
+        fail: console.error
+         
       })
       // // 获取用户信息
       // wx.getSetting({

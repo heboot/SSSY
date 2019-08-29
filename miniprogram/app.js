@@ -52,6 +52,8 @@ App({
     }
   },
   globalData: {
-    userInfo:{}
+    userInfo:{},
+    sessionCode:null,
+    phone:null
   }
 })
