@@ -1,7 +1,22 @@
 //app.js
 App({
   onLaunch: function () {
-    
+
+    console.log("场景值:", wx.getLaunchOptionsSync())
+    //判断场景值 去不同的页面
+    //1011	扫描二维码	 1012	长按图片识别二维码  1013	扫描手机相册中选取的二维码 1017	前往小程序体验版的入口页 1007	单人聊天会话中的小程序消息卡片 1008	群聊会话中的小程序消息卡片
+    //以上页面
+    if (wx.getLaunchOptionsSync().scene == 1007
+      || wx.getLaunchOptionsSync().scene == 1008
+      || wx.getLaunchOptionsSync().scene == 1001
+      || wx.getLaunchOptionsSync().scene == 1012
+      || wx.getLaunchOptionsSync().scene == 1012
+      || wx.getLaunchOptionsSync().scene == 1013
+      || wx.getLaunchOptionsSync().scene == 1017) {
+        
+    }
+
+
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -52,8 +67,8 @@ App({
     }
   },
   globalData: {
-    userInfo:{},
-    sessionCode:null,
-    phone:null
+    userInfo: {},
+    sessionCode: null,
+    phone: null
   }
 })

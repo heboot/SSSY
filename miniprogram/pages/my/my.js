@@ -16,7 +16,7 @@ Component({
     wx.checkSession({
       success(res) {
         that.vipNo = getApp().globalData.phone
-        console.log("check成功 获取code>", that.getApp().globalData.phone)
+        console.log("check成功 获取code>", getApp().globalData.phone)
         that.doLogin()
       },
       fail() {
@@ -78,13 +78,32 @@ Component({
           const tbUser = db.collection('tb_user').where({
             wx_code: _.eq(res.result.userInfo.openId)
           }).get({
-              success: function (res) {
-                console.log("query ok" + res)
-                if (res.data == null || res.data.length == 0) {
-                 
+              success: function (queryRes) {
+                console.log("query ok", queryRes,queryRes.data.length)
+                if (queryRes.data == null || queryRes.data.length == 0) {
+                  console.log("exe add")
+                  db.collection('tb_user').add({
+                    // data 字段表示需新增的 JSON 数据
+                    data: {
+                      // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
+                      create_time: new Date(),
+                      wx_code: res.result.userInfo.openId,
+                    },
+                    success: function (addRes) {
+                      // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+                      console.log(addRes)
+                    }
+                  })
                 } else {
-                  isReister = true
-                  console.log("login suc" + res.code)
+                  // isReister = true
+                  // that.setData({
+                  //   isReister: true
+                  // })
+                  // that.setData({
+                  //   vipNo: res.result.data.phoneNumber
+                  // })
+                  // getApp().globalData.phone = res.result.data.phoneNumber
+                  console.log("login suc",queryRes.data[0].wx_code)
                 }
               }
             })
@@ -115,7 +134,7 @@ Component({
         showView: false
       })
 
-      console.log(e)
+      console.log("toregister>",e)
       
       wx.cloud.callFunction({
         name: 'getPhone',

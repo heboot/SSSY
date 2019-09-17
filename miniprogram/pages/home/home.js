@@ -30,7 +30,7 @@ Component({
     //事件处理函数
     toAbout: function () {
       wx.navigateTo({
-        url: '../about/about'
+        url: '../nabout/about'
       })
     },
     onLoad() {

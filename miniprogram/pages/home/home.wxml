@@ -20,7 +20,7 @@
   <view class="padding-sm">
     <view class="bg-gradual-pink padding radius text-center shadow-blur">
       <view class="text-lg">摄影</view>
-      <view class="margin-top-sm text-Abc">证件，艺术，婚纱</view>
+      <view class="margin-top-sm text-Abc">证件，儿童，婚纱</view>
     </view>
   </view>
   <view class="padding-sm">
@@ -32,7 +32,7 @@
   <view class="padding-sm">
     <view class="bg-gradual-red padding radius text-center shadow-blur">
       <view class="text-lg">婚庆</view>
-      <view class="margin-top-sm text-Abc">专业，贴心</view>
+      <view class="margin-top-sm text-Abc">跟妆，跟拍</view>
     </view>
   </view>
   <view class="padding-sm" bindtap="toAbout">

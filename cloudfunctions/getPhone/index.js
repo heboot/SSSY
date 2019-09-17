@@ -33,6 +33,6 @@ exports.main = async (event, context) => {
   const resultValue = await requestSync(AccessToken_options);
   const pc = new WXBizDataCrypt(wxContext.APPID, resultValue.session_key)  // -解密第一步
   const data = pc.decryptData(event.encryptedData, event.iv) // 解密第二步 pc.decryptData(event.encryptedData, event.iv)   
-  const aaa= event.sessionCode
+  // const aaa= event.sessionCode
   return { data}
 }

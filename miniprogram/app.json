@@ -12,7 +12,8 @@
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/nabout/about"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

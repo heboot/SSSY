@@ -1,0 +1,35 @@
+.cu-form-group .title {
+  min-width: calc(4em + 30rpx);
+}
+
+/* pages/home/home.wxss */
+
+.tower-swiper .tower-item {
+  transform: scale(calc(0.5 + var(--index) / 10));
+  margin-left: calc(var(--left) * 100rpx - 150rpx);
+  z-index: var(--index);
+}
+
+.line1{
+  margin-left: 50rpx;
+  margin-top: 20rpx;
+}
+.aboutcontainer{
+  background-color: red,
+  
+}
+
+.logo-content {
+  width: 100%;
+  height: 300rpx;
+  margin-top: 50rpx;
+  justify-content: center;
+  display: flex;
+}
+
+.logo {
+  margin-top: 30rpx;
+  margin: 0 auto;
+  width: 300rpx;
+  height: 300rpx;
+}

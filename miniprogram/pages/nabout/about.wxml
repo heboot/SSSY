@@ -1,0 +1,32 @@
+<cu-custom bgColor="bg-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">关于我们</view>
+</cu-custom>
+<view class="aboutcontainer">
+<view class="logo-content">
+  <image class="logo" src="../../images/logo.png"></image>
+</view>
+<view>
+  <p class="line1">新密市平陌镇水生照相馆始创于1983年，迄今为止，证件照，儿童照，婚纱照等已服务人次高达200万，结婚新人1800余对，演出秀场2000余场。</p>
+</view>
+<view>
+  <p class="line1">30多年来，我们秉承着：</p>
+</view>
+
+<view>
+  <p class="line1">①.以诚信为本，顾客至上的管理理念。</p>
+</view>
+<view>
+  <p class="line1">②.以不断提升专业技术，产品升级与创新为核心。</p>
+</view>
+<view>
+  <p class="line1">③.以饱满热情的服务态度为连接你我的桥梁。</p>
+</view>
+<view>
+  <p class="line1">④.以顾客满意为最终目标的前进方向。</p>
+</view>
+
+<view>
+  <p class="line1">
+    以前、现在、将来，水生照相馆始终如一，欢迎您的到来。</p>
+</view></view>
