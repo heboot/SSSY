@@ -43,7 +43,7 @@
   </view>
 </view>
 
-<view class="cu-bar bg-white solid-bottom">
+<!-- <view class="cu-bar bg-white solid-bottom">
   <view class='action'>
     <text class='cuIcon-titles text-pink '></text> 客户评价
   </view>
@@ -75,6 +75,6 @@
       <view class="text-lg  text-left">“上回俺一大家子去拍全家福，拍的可专业，后期还给做了一下背景，可宣”</view>
       <view class="margin-top-sm  text-right text-Abc">匿名用户</view>
     </view>
-</view>
+</view> -->
 
 </scroll-view>

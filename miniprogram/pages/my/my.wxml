@@ -49,7 +49,7 @@
     <view class='text-center margin-bottom text-lg  text-grey'>商家信息</view>
     <view class='text-content'>
       <view>Hi！欢迎来到水生照相馆！</view>
-      <view class='margin-top-sm'>可能是北半球第二专业的摄影机构了</view>
+      <!-- <view class='margin-top-sm'>可能是北半球第二专业的摄影机构了</view> -->
     </view>
   </view>
   <view class="cu-tabbar-height"></view>
@@ -70,7 +70,7 @@
         <view class="action">
           <button class="cu-btn line-green text-green" bindtap="hideModal">我再想想</button>
           <!-- <button class="cu-btn bg-green margin-left" bindtap="toRegister">加入</button> -->
-          <button  class="cu-btn bg-green margin-left" open-type="getPhoneNumber" bindgetphonenumber="toRegister">计入</button>
+          <button  class="cu-btn bg-green margin-left" open-type="getPhoneNumber" bindgetphonenumber="toRegister">加入</button>
         </view>
       </view>
     </view>
