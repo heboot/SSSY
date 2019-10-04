@@ -13,7 +13,8 @@
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
     "pages/about/about",
-    "pages/nabout/about"
+    "pages/nabout/about",
+    "pages/pay/pay"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

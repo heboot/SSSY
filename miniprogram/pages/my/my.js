@@ -15,9 +15,19 @@ Component({
     let that = this
     wx.checkSession({
       success(res) {
-        that.vipNo = getApp().globalData.phone
-        console.log("check成功 获取code>", getApp().globalData.phone)
-        that.doLogin()
+        that.setData({
+          vipNo: getApp().globalData.phone
+        })
+        if(that.data.vipNo == null){
+          //需要点击加入会员
+        }else{
+          //已经是会有了 有手机号呀
+          that.setData({
+            isReister: true
+          })
+        }
+        console.log("check成功 获取code>", that.data.vipNo)
+        // that.doLogin()
       },
       fail() {
         // session_key 已经失效，需要重新执行登录流程

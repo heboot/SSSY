@@ -1,0 +1,30 @@
+/* miniprogram/pages/pay/pay.wxss */
+.logo-content {
+  width: 100%;
+  height: 300rpx;
+  margin-top: 50rpx;
+  justify-content: center;
+  display: flex;
+}
+
+.logo {
+  margin-top: 30rpx;
+  margin: 0 auto;
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.logo-content2 {
+  width: 100%;
+  height: 600rpx;
+  margin-top: 250rpx;
+  justify-content: center;
+  display: flex;
+}
+
+.logo2 {
+  margin-top: 230rpx;
+  margin: 0 auto;
+  width: 500rpx;
+  height: 500rpx;
+}

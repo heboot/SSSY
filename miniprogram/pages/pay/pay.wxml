@@ -1,0 +1,59 @@
+<cu-custom bgColor="bg-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">支付</view>
+</cu-custom>
+<view class="aboutcontainer">
+  <view class="logo-content">
+    <image class="logo" src="../../images/logo.png"></image>
+  </view>
+  <view class='cu-list menu card-menu margin-xl bg-white padding-xl radius shadow-lg'>
+
+    <view class='text-content'>
+      <view>非常感谢您的光临，微信小程序支付哈有惊喜哦！</view>
+      <form>
+        <view class="padding-sm">
+          <view class="cu-form-group">
+            <input bindinput="payMoneyInput" focus="{{true}}" placeholder="请输入付款金额"></input>
+
+
+          </view>
+          <view class="padding flex flex-direction">
+            <button class="cu-btn bg-green lg" bindtap="showRedModal" data-target="DialogModal3">支付</button>
+          </view>
+        </view>
+      </form>
+
+    </view>
+
+  </view>
+</view>
+<view class="aboutcontainer">
+  <view class="logo-content2">
+    <view class="cu-modal {{modalName=='DialogModal3'?'show':''}}" bindtap="doGetMoney" data-target="DialogModal2">
+
+      <image class="logo2" src="../../images/bg_redpacket.png"></image>
+
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='DialogModal2'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">生生照相馆</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      恭喜你您获得了{{getMoney}}元的优惠金额,还需支付{{inputMoney-getMoney}}元
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub text-green " bindtap="hideModal">
+        <text class="cuIcon-moneybag"></text>支付</view>
+      <view class="action margin-0 flex-sub text-green solid-left" bindtap="hideModal">取消</view>
+      <!-- <view class="action margin-0 flex-sub  solid-left" bindtap="hideModal">抽奖</view> -->
+    </view>
+
+
+  </view>
+</view>
