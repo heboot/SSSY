@@ -1,0 +1,17 @@
+{
+  "name": "ment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypt": "0.0.2",
+    "request": "^2.88.0",
+    "wx-server-sdk": "latest",
+    "xmlreader": "^0.2.3"
+  }
+}

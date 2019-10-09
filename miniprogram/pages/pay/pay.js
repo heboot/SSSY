@@ -127,4 +127,38 @@ Page({
       inputMoney: e.detail.value
     })
   },
+  pay:function(){
+    let that= this
+    //需要上传给云函数的数据
+    let uploadData = {
+      //此次需要支付的金额，单位是分。例如¥1.80=180
+      "total_fee": 122,
+      //用户端的ip地址
+      "spbill_create_ip": "123.123.123.123"
+    }
+    //调用云函数
+    wx.cloud.callFunction({
+      //云函数的名字，这里我定义为payment
+      name: "payment",
+      //需要上传的数据
+      data: uploadData
+    }).then(res => {
+      console.log("调用云函数支付之后的返回",res)
+      //这个res就是云函数返回的5个参数
+      //通过wx.requestPayment发起支付
+      wx.requestPayment({
+        timeStamp: res.result.data.timeStamp,
+        nonceStr: res.result.data.nonceStr,
+        package: res.result.data.package,
+        signType: res.result.data.signType,
+        paySign: res.result.data.paySign,
+        success: res => {
+          //支付成功
+        },
+        fail: err => {
+          //支付失败
+        }
+      })
+    })
+  }
 })
