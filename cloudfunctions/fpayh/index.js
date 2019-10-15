@@ -1,5 +1,5 @@
 const rp = require('request-promise')
-const request = require("request")
+// const request = require("request")
 const crypto = require('crypto')
 const cloud = require('wx-server-sdk')
 // var Parser = require('dom-parser')
@@ -19,22 +19,22 @@ function paysign({
   sa.push('key=' + key)
   return crypto.createHash('md5').update(sa.join('&'), 'utf8').digest('hex').toUpperCase()
 }
-exports.main = async(event, context) => {
-  return new Promise(async(resolve, reject) => {
+exports.main = async (event, context) => {
+  return new Promise(async (resolve, reject) => {
     try {
       // appid openid
       let appid = "wx5085c0ec03e0db18"
       let openid = cloud.getWXContext().OPENID
       let {
         OPENID = cloud.getWXContext().OPENID,
-          APPID = "wx5085c0ec03e0db18",
+        APPID = "wx5085c0ec03e0db18",
       } = cloud.getWXContext()
       // 附加数据 例如:深圳分店
-      const attach = "sssy"
+      const attach = "水生照相馆"
       // 商品描述  128字节  例如:腾讯充值中心-QQ会员充值
-      const body = "sss"
+      const body = "会员支付服务"
       // 标价金额  订单总金额，单位为分
-      const total_fee = 12
+      const total_fee = 1
       // 回调地址  填写也无效
       const notify_url = "https://www.qq.com/notify"
       // 终端IP
@@ -80,33 +80,35 @@ exports.main = async(event, context) => {
         body: formData
       })
 
-     
+
 
       // 处理格式
       let xml = res.toString("utf-8")
       if (xml.indexOf('prepay_id') < 0) throw { code: 7350, data: res, info: '支付失败！' }
-      // let prepay_id = xml.split("<prepay_id>")[1].split("</prepay_id>")[0].split('[')[2].split(']')[0]
-      // // 加密字符串
-      // let paySign = paysign({
-      //   appId: appid,
-      //   nonceStr: nonce_str,
-      //   package: ('prepay_id=' + prepay_id),
-      //   signType: 'MD5',
-      //   timeStamp: timeStamp
-      // })
-      // //成功返回
-      // resolve({
-      //   code: 0,
-      //   data: {
-      //     appid,
-      //     nonce_str,
-      //     timeStamp,
-      //     prepay_id,
-      //     paySign,
-      //     signType: 'MD5'
-      //   },
-      //   info: '操作成功！'
-      // })
+      let prepay_id = xml.split("<prepay_id>")[1].split("</prepay_id>")[0].split('[')[2].split(']')[0]
+      // 加密字符串
+      let paySign = paysign({
+        appId: appid,
+        nonceStr: nonce_str,
+        package: ('prepay_id=' + prepay_id),
+        signType: 'MD5',
+        timeStamp: timeStamp
+      })
+      let package = ('prepay_id=' + prepay_id)
+      //成功返回
+      resolve({
+        code: 0,
+        data: {
+          appid,
+          nonce_str,
+          timeStamp,
+          prepay_id,
+          package,
+          paySign,
+          signType: 'MD5'
+        },
+        info: '操作成功！'
+      })
     } catch (error) {
       console.log("云函数3", formData, data)
       if (!error.code) reject(error)

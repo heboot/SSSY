@@ -1,7 +1,6 @@
 //云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init()
-const openid = cloud.getWXContext().OPENID
 const appid = 'wx5085c0ec03e0db18'
 const mch_id = '1549948141'
 const random = require('random.js')
@@ -16,10 +15,12 @@ const xmlreader = require("xmlreader")
 
 //云函数入口函数
 exports.main = async (event, content) => {
+  const openid = cloud.getWXContext().OPENID
   const out_trade_no = Date.parse(new Date()).toString()
+  const nonce_str = Math.random().toString(36).substr(2, 15)
   const total_fee = event.total_fee
   const spbill_create_ip = event.spbill_create_ip
-  let stringA = `appid=${appid}&body=${body}&mch_id=${mch_id}&nonce_str=${random}&notify_url=${notify_url}&openid=${openid}&out_trade_no=${out_trade_no}&spbill_create_ip=${spbill_create_ip}&total_fee=${total_fee}&trade_type=${trade_type}&key=CFFSSSMSMXN259175667725917599777`
+  let stringA = `appid=${appid}&body=${body}&mch_id=${mch_id}&nonce_str=${nonce_str}&notify_url=${notify_url}&openid=${openid}&out_trade_no=${out_trade_no}&spbill_create_ip=${spbill_create_ip}&total_fee=${total_fee}&trade_type=${trade_type}&key=CFFSSSMSMXN259175667725917599777`
   var sign = crypto.createHash('md5').update(stringA).digest('hex').toUpperCase()
   let dataBody = requestData(
     appid,
@@ -40,9 +41,10 @@ exports.main = async (event, content) => {
       method: "POST",
       body: dataBody
     }, body => {
-       
+      
+      console.log("云函数1", dataBody)
       xmlreader.read(body, res => {
-        console.log(res)
+        console.log("云函数2", res)
         // let prepay_id = res.xml.prepay_id.text()
         // let timeStamp = Date.parse(new Date()).toString()
         // let str = `appId=${appid}&nonceStr=${random}&package=prepay_id=${prepay_id}&signType=MD5&timeStamp=${timeStamp}&key=CFFsssmsmxn259175667725917599777`

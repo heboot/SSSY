@@ -1,4 +1,4 @@
-
+          
 Component({
   options: {
     addGlobalClass: true,
@@ -144,7 +144,7 @@ Component({
         showView: false
       })
 
-      console.log("toregister>",e)
+     
       
       wx.cloud.callFunction({
         name: 'getPhone',
@@ -154,7 +154,7 @@ Component({
           sessionCode: getApp().globalData.sessionCode
         },
         success: function (res) {
-        
+          console.log("获取到手机号了>", e)
           that.setData({
             isReister: true
           })
@@ -162,7 +162,30 @@ Component({
             vipNo: res.result.data.phoneNumber
           })
           getApp().globalData.phone = res.result.data.phoneNumber
-          console.log(res.result.data.phoneNumber) // 3
+          console.log(res.result.data.phoneNumber) 
+          //更新这个用户的手机号 这个用户在进入这个页面的时候已经做过入库操作了
+          const db = wx.cloud.database()
+          const _ = db.command
+          db.collection('tb_user').where({
+            wx_code: _.eq(res.result.openid)
+          }).update({
+            data:{
+              mobile: res.result.data.phoneNumber
+            },
+            success: function () {
+              wx.showToast({
+                title: '加入成功',
+              })
+              this.setData({
+                isReister: true
+              })
+              this.setData({
+                vipNo: getApp().globalData.phone
+              })
+
+            }
+          })
+           
         },
         fail: console.error
          

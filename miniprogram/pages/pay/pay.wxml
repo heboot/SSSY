@@ -39,7 +39,7 @@
 <view class="cu-modal {{modalName=='DialogModal2'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
-      <view class="content">生生照相馆</view>
+      <view class="content">水生照相馆</view>
       <view class="action" bindtap="hideModal">
         <text class="cuIcon-close text-red"></text>
       </view>
@@ -54,6 +54,44 @@
       <!-- <view class="action margin-0 flex-sub  solid-left" bindtap="hideModal">抽奖</view> -->
     </view>
 
+
+  </view>
+</view>
+
+<view class="cu-modal {{modalName=='DialogModal4'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">水生照相馆</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+       支付{{inputMoney-getMoney}}元
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub text-green " bindtap="pay">
+        <text class="cuIcon-moneybag"></text>支付</view>
+      <view class="action margin-0 flex-sub text-green solid-left" bindtap="hideModal">取消</view>
+      <!-- <view class="action margin-0 flex-sub  solid-left" bindtap="hideModal">抽奖</view> -->
+    </view>
+
+
+  </view>
+</view>
+
+<view class="cu-modal {{modalName=='PaySucDialog'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">水生照相馆</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+       支付成功，获得{{source}}积分，感谢您对水生照相馆的支持！
+    </view>
+    
 
   </view>
 </view>
