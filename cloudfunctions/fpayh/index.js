@@ -105,6 +105,8 @@ exports.main = async (event, context) => {
           prepay_id,
           package,
           paySign,
+          out_trade_no,
+          openid,
           signType: 'MD5'
         },
         info: '操作成功！'

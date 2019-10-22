@@ -7,7 +7,9 @@
      getMoney: null,
      inputMoney: null,
      source: null,
-     payMoney: null
+     payMoney: null,
+     orderNo:null,
+     saleTime:null
    },
 
    /**
@@ -81,10 +83,25 @@
      }
 
      if (this.data.inputMoney >= 10) {
-       this.setData({
-         modalName: 'DialogModal3'
-       })
-       that.showModal(modalName)
+       if (this.data.saleTime == null){
+        this.setData({
+          modalName: 'DialogModal3'
+        })
+         this.setData({
+           saleTime: Date.parse(new Date())
+         })
+        that.showModal(modalName)
+      }else{
+        this.setData({
+          getMoney: 0
+        })
+        this.setData({
+          modalName: 'DialogModal4'
+        })
+        console.log(modalName)
+        that.showModal(e)
+      }
+      
      } else {
        this.setData({
          getMoney: 0
@@ -137,6 +154,7 @@
        })
      }
      that.showModal('DialogModal2')
+    
      console.log(that.data.getMoney)
    },
    payMoneyInput: function(e) {
@@ -179,13 +197,17 @@
        wx.hideLoading()
        //这个res就是云函数返回的5个参数
        //通过wx.requestPayment发起支付
+       this.setData({
+         orderNo: res.result.data.out_trade_no,
+       })
        wx.requestPayment({
          timeStamp: res.result.data.timeStamp,
          nonceStr: res.result.data.nonce_str,
          package: res.result.data.package,
          signType: res.result.data.signType,
          paySign: res.result.data.paySign,
-         success: res => {
+    
+         success: resn => {
            //支付成功
            this.setData({
              source: this.data.payMoney
@@ -193,6 +215,42 @@
            this.setData({
              modalName: 'PaySucDialog'
            })
+          //更新用户的积分 ,另外需要插入一条积分记录
+           const db = wx.cloud.database()
+           const _ = db.command
+           let that = this
+           db.collection('tb_user').doc(getApp().globalData.dbId).get({
+             success: function (res) {
+             
+               // res.data 包含该记录的数据
+               console.log("查询更新积分",res)
+               const newSource = res.data.source + that.data.payMoney
+               console.log("新积分", newSource)
+               db.collection('tb_user').doc(getApp().globalData.dbId).update({
+                 // data 传入需要局部更新的数据
+                 data: {
+                   // 表示将 done 字段置为 true
+                   source: newSource
+                 },
+                 success: function (res) {
+                  //  console.log(res.data)
+                 }
+               })
+             }
+           })
+
+           db.collection('tb_source').add({
+             // data 字段表示需新增的 JSON 数据
+             data: {
+               // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
+               order_id: res.result.data.out_trade_no,
+               wx_code: res.result.data.openid,
+               source: this.data.payMoney
+             },
+             success: function (res) {
+               // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+               console.log(res)
+             }})
 
            that.showModal(e)
          },

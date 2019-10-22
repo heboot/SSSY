@@ -47,6 +47,9 @@
     <view class="padding-xl">
       恭喜你您获得了{{getMoney}}元的优惠,还需支付{{inputMoney-getMoney}}元
     </view>
+     <view  >
+      取消之后将不能享受本次优惠
+    </view>
     <view class="cu-bar bg-white">
       <view class="action margin-0 flex-sub text-green " bindtap="pay">
         <text class="cuIcon-moneybag"></text>支付</view>

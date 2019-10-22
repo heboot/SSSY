@@ -33,13 +33,13 @@ App({
       //判断场景值 去不同的页面
       //1011	扫描二维码	 1012	长按图片识别二维码  1013	扫描手机相册中选取的二维码 1017	前往小程序体验版的入口页 1007	单人聊天会话中的小程序消息卡片 1008	群聊会话中的小程序消息卡片
       //以上页面
-      // if (wx.getLaunchOptionsSync().scene == 1007
-      //   || wx.getLaunchOptionsSync().scene == 1008
-      //   || wx.getLaunchOptionsSync().scene == 1001
-      //   || wx.getLaunchOptionsSync().scene == 1012
-      //   || wx.getLaunchOptionsSync().scene == 1012
-      //   || wx.getLaunchOptionsSync().scene == 1013
-      //   || wx.getLaunchOptionsSync().scene == 1017) {
+      if (wx.getLaunchOptionsSync().scene == 1007
+        || wx.getLaunchOptionsSync().scene == 1008
+        || wx.getLaunchOptionsSync().scene == 1001
+        || wx.getLaunchOptionsSync().scene == 1012
+        || wx.getLaunchOptionsSync().scene == 1012
+        || wx.getLaunchOptionsSync().scene == 1013
+        || wx.getLaunchOptionsSync().scene == 1017) {
       
       wx.checkSession({
         success() {
@@ -71,6 +71,7 @@ App({
                     // getApp().globalData.phone = res.result.data.phoneNumber
                     console.log("数据库查到用户了", queryRes.data[0])
                     getApp().globalData.sessionCode = queryRes.data[0].wx_code
+                    getApp().globalData.dbId = queryRes.data[0]._id
                     getApp().globalData.phone = queryRes.data[0].mobile
                     getApp().globalData.userInfo = queryRes.data[0]
                     if (getApp().globalData.phone ==null){
@@ -94,11 +95,12 @@ App({
         }
       })
 
-    // }
+    }
 
     }
   },
   globalData: {
+    dbId:null,
     userInfo: null,
     sessionCode: null,
     phone: null

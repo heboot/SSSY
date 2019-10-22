@@ -98,6 +98,7 @@ Component({
                       // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
                       create_time: new Date(),
                       wx_code: res.result.userInfo.openId,
+                      source:0
                     },
                     success: function (addRes) {
                       // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
