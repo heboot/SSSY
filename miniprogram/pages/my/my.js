@@ -27,7 +27,7 @@ Component({
           })
         }
         console.log("check成功 获取code>", that.data.vipNo)
-        // that.doLogin()
+        that.doLogin()
       },
       fail() {
         // session_key 已经失效，需要重新执行登录流程
@@ -79,32 +79,49 @@ Component({
         // 需调用的云函数名
         name: 'login',
         complete:res=>{
-        
-          console.log(res.result.userInfo.openId)
-         
           const db = wx.cloud.database()
           const _ = db.command
+          console.log("当前登录的openid", res.result.openid)
           //查询云数据库有没有openId为当前登陆者的记录 如果有，则绑定过手机号
-          const tbUser = db.collection('tb_user').where({
-            wx_code: _.eq(res.result.userInfo.openId)
+          db.collection('tb_user').where({
+            wx_code: _.eq(res.result.openid)
           }).get({
               success: function (queryRes) {
                 console.log("query ok", queryRes,queryRes.data.length)
                 if (queryRes.data == null || queryRes.data.length == 0) {
-                  console.log("exe add")
-                  db.collection('tb_user').add({
-                    // data 字段表示需新增的 JSON 数据
-                    data: {
-                      // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
-                      create_time: new Date(),
-                      wx_code: res.result.userInfo.openId,
-                      source:0
-                    },
-                    success: function (addRes) {
-                      // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-                      console.log(addRes)
-                    }
-                  })
+                  const db = wx.cloud.database()
+                  const hhh = db.collection('tb_user')
+                    .add({
+                      data: {
+                        create_time: new Date(),
+                        wx_code: res.result.openid,
+                        source: 0
+                      },
+                      success: res => {
+                        
+                        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+                      },
+                      fail: err => {
+                        wx.showToast({
+                          icon: 'none',
+                          title: '新增记录失败'
+                        })
+                        console.error('[数据库] [新增记录] 失败：', err)
+                      }
+                    })
+                  
+                  // .add({
+                  //   // data 字段表示需新增的 JSON 数据
+                  //   data: {
+                  //     // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
+                  //     // create_time: new Date(),
+                  //     // wx_code: res.userInfo.openId,
+                  //     source:0
+                  //   }.then(addres => {
+                  //     console.log("heheda>", addres)
+                  //   })
+                  // })
+                  console.log("heheda1>", hhh)
                 } else {
                   // isReister = true
                   // that.setData({
@@ -144,9 +161,7 @@ Component({
       this.setData({
         showView: false
       })
-
-     
-      
+      console.log("获取到手机之前>", e) 
       wx.cloud.callFunction({
         name: 'getPhone',
         data:{
@@ -188,7 +203,9 @@ Component({
           })
            
         },
-        fail: console.error
+        fail: function(e){
+          console.log(e,">>>")
+        }
          
       })
       // // 获取用户信息
