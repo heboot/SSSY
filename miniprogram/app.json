@@ -14,7 +14,8 @@
     "pages/openapi/cloudid/cloudid",
     "pages/about/about",
     "pages/nabout/about",
-    "pages/pay/pay"
+    "pages/pay/pay",
+    "pages/coupon/coupon"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

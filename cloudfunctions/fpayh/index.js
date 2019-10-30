@@ -34,7 +34,7 @@ exports.main = async (event, context) => {
       // 商品描述  128字节  例如:腾讯充值中心-QQ会员充值
       const body = "会员支付服务"
       // 标价金额  订单总金额，单位为分
-      const total_fee = 1
+      const total_fee = event.total_fee * 10
       // 回调地址  填写也无效
       const notify_url = "https://www.qq.com/notify"
       // 终端IP

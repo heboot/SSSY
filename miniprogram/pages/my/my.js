@@ -9,7 +9,9 @@ Component({
     visitTotal: 0,
     showView: false,
     isReister:false,
-    vipNo:null
+    vipNo:null,
+    showGetInfoDialog:false,
+    mavatar:"/images/logo.png"
   },
   attached: function() {
     let that = this
@@ -26,7 +28,7 @@ Component({
             isReister: true
           })
         }
-        console.log("check成功 获取code>", that.data.vipNo)
+        console.log("check成功 获取code>",   that.data.isReister)
         that.doLogin()
       },
       fail() {
@@ -44,35 +46,38 @@ Component({
         })
       }
     })
-    wx.showLoading({
-      title: '数据加载中',
-      mask: true,
-    })
+    // wx.showLoading({
+    //   title: '数据加载中',
+    //   mask: true,
+    // })
     let i = 0;
     numDH();
 
     function numDH() {
-      if (i < 20) {
-        setTimeout(function() {
-          that.setData({
-            starCount: i,
-            forksCount: i,
-            visitTotal: i
-          })
-          i++
-          numDH();
-        }, 20)
-      } else {
+      // if (i < 20) {
+      //   setTimeout(function() {
+      //     that.setData({
+      //       starCount: i,
+      //       forksCount: i,
+      //       visitTotal: i
+      //     })
+      //     i++
+      //     numDH();
+      //   }, 20)
+      // } else {
         that.setData({
-          starCount: that.coutNum(3000),
-          forksCount: that.coutNum(484),
-          visitTotal: that.coutNum(24000)
+          starCount: that.coutNum(3),//优惠券
+          // forksCount: that.coutNum(getApp().globalData.userInfo.source),
+          visitTotal: that.coutNum(getApp().globalData.userInfo.source)
         })
-      }
+      // }
     }
     wx.hideLoading()
   },
   methods: {
+    showGetInfoDialog:function(){
+
+    },
     doLogin: function() {
       let that = this
       wx.cloud.callFunction({
@@ -98,7 +103,6 @@ Component({
                         source: 0
                       },
                       success: res => {
-                        
                         console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
                       },
                       fail: err => {
@@ -109,34 +113,80 @@ Component({
                         console.error('[数据库] [新增记录] 失败：', err)
                       }
                     })
-                  
-                  // .add({
-                  //   // data 字段表示需新增的 JSON 数据
-                  //   data: {
-                  //     // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
-                  //     // create_time: new Date(),
-                  //     // wx_code: res.userInfo.openId,
-                  //     source:0
-                  //   }.then(addres => {
-                  //     console.log("heheda>", addres)
-                  //   })
-                  // })
                   console.log("heheda1>", hhh)
+                  //that.getWxUserInfo()
                 } else {
                   // isReister = true
-                  // that.setData({
-                  //   isReister: true
-                  // })
-                  // that.setData({
-                  //   vipNo: res.result.data.phoneNumber
-                  // })
-                  // getApp().globalData.phone = res.result.data.phoneNumber
-                  console.log("login suc",queryRes.data[0].wx_code)
+                  that.setData({
+                    source: queryRes.data[0].source
+                  })
+                  that.getWxUserInfo()
                 }
               }
             })
         }
+        
       })
+    },
+    getWxUserInfo(){
+      // // 获取用户信息
+      let that = this
+      
+      if (getApp().globalData.wxUserInfo != null){
+        console.log("本地好像有", getApp().globalData.wxUserInfo)
+        that.setData({
+          mavatar: getApp().globalData.wxUserInfo.avatarUrl
+        })
+        return
+
+      }
+      
+      wx.getSetting({
+        success: res => {
+          console.log("获取微信用户信息>3")
+          if (res.authSetting['scope.userInfo']) {
+            console.log("获取微信用户信息>>1223333")
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+            wx.getUserInfo({
+              success: res => {
+                console.log("获取微信用户信息>>111", res)
+                // 可以将 res 发送给后台解码出 unionId
+                getApp().globalData.wxUserInfo = res.userInfo
+                console.log(res.userInfo)
+                that.setData({
+                  mavatar: res.userInfo.avatarUrl
+                })
+                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                // 所以此处加入 callback 以防止这种情况
+                if (this.userInfoReadyCallback) {
+                  this.userInfoReadyCallback(res)
+                }
+              }
+    
+            })
+          } else {
+            console.log("获取微信用户信息>>1222")
+            that.setData({
+              modalName: 'bottomModal'
+            })
+            that.setData({
+              showGetInfoDialog: true
+            })
+          }
+        },
+        fail:e=>{
+          console.log("获取微信用户信息>>2")
+        }
+      })
+
+    },
+    bindGetUserInfo(e){
+      console.log("授权获取微信信息哦",e)
+      getApp().globalData.wxUserInfo = e.detail.userInfo
+      this.setData({
+        mavatar: e.detail.userInfo.avatarUrl
+      })
+      this.hideGetUser()
     },
     showV:function(){
       display:none
@@ -144,10 +194,25 @@ Component({
     showV: function () {
       display: block
     },
+    toConpon:function(){
+      if (!this.data.isReister) {
+        this.showModal()
+        return
+      }
+      wx.navigateTo({
+        url: '../coupon/coupon'
+      })
+    },
     showModal: function() {
       console.log("执行显示")
       this.setData({
         showView: true
+      })
+    },
+    hideGetUser:function(){
+      console.log("执行隐藏")
+      this.setData({
+        modalName: null
       })
     },
     hideModal: function() {
@@ -162,12 +227,13 @@ Component({
         showView: false
       })
       console.log("获取到手机之前>", e) 
+      console.log("获取到手机之前呀>", getApp().globalData.sessionKeyCode) 
       wx.cloud.callFunction({
         name: 'getPhone',
         data:{
           encryptedData: e.detail.encryptedData,
           iv: e.detail.iv,
-          sessionCode: getApp().globalData.sessionCode
+          sessionCode: getApp().globalData.sessionKeyCode
         },
         success: function (res) {
           console.log("获取到手机号了>", e)
@@ -182,9 +248,8 @@ Component({
           //更新这个用户的手机号 这个用户在进入这个页面的时候已经做过入库操作了
           const db = wx.cloud.database()
           const _ = db.command
-          db.collection('tb_user').where({
-            wx_code: _.eq(res.result.openid)
-          }).update({
+          that.getWxUserInfo()
+          db.collection('tb_user').doc(getApp().globalData.phone.dbId).update({
             data:{
               mobile: res.result.data.phoneNumber
             },
@@ -192,14 +257,17 @@ Component({
               wx.showToast({
                 title: '加入成功',
               })
+            
               this.setData({
                 isReister: true
               })
               this.setData({
                 vipNo: getApp().globalData.phone
               })
-
+               
+             
             }
+             
           })
            
         },
@@ -208,30 +276,7 @@ Component({
         }
          
       })
-      // // 获取用户信息
-      // wx.getSetting({
-      //   success: res => {
-      //     if (res.authSetting['scope.userInfo']) {
-      //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-      //       wx.getUserInfo({
-      //         success: res => {
-      //           // 可以将 res 发送给后台解码出 unionId
-      //           getApp().globalData.userInfo = res.userInfo
-      //           console.log(res.userInfo)
-      //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      //           // 所以此处加入 callback 以防止这种情况
-      //           if (this.userInfoReadyCallback) {
-      //             this.userInfoReadyCallback(res)
-      //           }
-      //         }
-      //       })
-      //     }else{
-      //       wx.showToast({
-      //         title: '需要提供授权',
-      //       })
-      //     }
-      //   }
-      // })
+    
       // wx.navigateTo({
       //   url: '../register/register'
       // })
