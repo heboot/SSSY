@@ -4,7 +4,7 @@ Component({
     addGlobalClass: true,
   },
   data: {
-    starCount: 0,
+    starCount: 3,
     forksCount: 0,
     visitTotal: 0,
     showView: false,
@@ -100,10 +100,13 @@ Component({
                       data: {
                         create_time: new Date(),
                         wx_code: res.result.openid,
-                        source: 0
+                        source: 0,
+                        mobile:that.data.vipNo
+                         
                       },
                       success: res => {
                         console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+                        getApp().globalData.dbId = res._id
                       },
                       fail: err => {
                         wx.showToast({
@@ -249,7 +252,7 @@ Component({
           const db = wx.cloud.database()
           const _ = db.command
           that.getWxUserInfo()
-          db.collection('tb_user').doc(getApp().globalData.phone.dbId).update({
+          db.collection('tb_user').doc(getApp().globalData.dbId).update({
             data:{
               mobile: res.result.data.phoneNumber
             },

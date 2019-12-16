@@ -37,6 +37,12 @@ App({
       
       wx.checkSession({
         success() {
+          wx.login({
+            success(res) {
+              if (res.code) {
+                console.log('app.js do wxlogin>>>', res)
+                getApp().globalData.sessionKeyCode = res.code
+              }}}),
           //session_key 未过期，并且在本生命周期一直有效
           wx.cloud.callFunction({
             // 需调用的云函数名
