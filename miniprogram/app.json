@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/mindex",
+   "pages/index/mindex",
     "pages/pay/pay",
+    
     "pages/home/home",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -18,8 +19,8 @@
     "pages/coupon/coupon"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#39b54a",
-    "navigationBarTitleText": "Color UI",
+    "navigationBarBackgroundColor": "#FC89CC",
+    "navigationBarTitleText": "水生照相馆",
     "navigationStyle": "custom",
     "navigationBarTextStyle": "white"
   },

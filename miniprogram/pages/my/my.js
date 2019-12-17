@@ -15,6 +15,12 @@ Component({
   },
   attached: function() {
     let that = this
+    if (getApp().globalData.isVip){
+      //已经是会有了 有手机号呀
+      that.setData({
+        isReister: true
+      })
+    }
     wx.checkSession({
       success(res) {
         that.setData({
@@ -136,9 +142,22 @@ Component({
       let that = this
       
       if (getApp().globalData.wxUserInfo != null){
-        console.log("本地好像有", getApp().globalData.wxUserInfo)
-        that.setData({
-          mavatar: getApp().globalData.wxUserInfo.avatarUrl
+
+        const db = wx.cloud.database()
+        const _ = db.command
+        db.collection('tb_user').doc(getApp().globalData.dbId).get({
+          success: function (res) {
+            getApp().globalData.userInfo = res.data
+            // res.data 包含该记录的数据
+            console.log(res.data)
+            that.setData({
+              source: res.data.source
+            })
+            that.setData({
+              mavatar: getApp().globalData.wxUserInfo.avatarUrl
+            })
+             
+          }
         })
         return
 

@@ -81,9 +81,9 @@ App({
                       console.log("手机号不为空哦")
                       getApp().globalData.isVip = true
                       //有手机号注册过 然后还经过这些场景值进来 直接去支付页面
-                      // wx.navigateTo({
-                      //   url: '../pay/pay'
-                      // })
+                      wx.navigateTo({
+                        url: '../pay/pay'
+                      })
                     }
                   }
                 }
@@ -136,9 +136,9 @@ App({
                             getApp().globalData.isVip = true
                             console.log("手机号不为空哦")
                             //有手机号注册过 然后还经过这些场景值进来 直接去支付页面
-                            // wx.navigateTo({
-                            //   url: '../pay/pay'
-                            // })
+                            wx.navigateTo({
+                              url: '../pay/pay'
+                            })
                           }
                         }
                       }

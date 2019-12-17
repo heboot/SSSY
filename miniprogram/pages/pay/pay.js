@@ -30,130 +30,141 @@
     * 生命周期函数--监听页面显示
     */
    onShow: function() {
-     console.log("检测会员", getApp().globalData.isVip)
-     if (!getApp().globalData.isVip){
+    //  console.log("检测会员", getApp().globalData.isVip)
+    //  if (!getApp().globalData.isVip){
 
-      wx.navigateTo({
-                        url: '../index/mindex'
-                      })
-     }
+    //   wx.navigateTo({
+    //                     url: '../index/mindex'
+    //                   })
+    //  }
 
-    //  wx.checkSession({
-    //    success() {
-    //      //session_key 未过期，并且在本生命周期一直有效
-    //      wx.cloud.callFunction({
-    //        // 需调用的云函数名
-    //        name: 'login',
-    //        complete: res => {
+     wx.checkSession({
+       success() {
+         wx.login({
+           success(res) {
+             if (res.code) {
+               console.log('app.js do wxlogin>>>', res)
+               getApp().globalData.sessionKeyCode = res.code
+             }
+           }
+         }),
+           //session_key 未过期，并且在本生命周期一直有效
+           wx.cloud.callFunction({
+             // 需调用的云函数名
+             name: 'login',
+             complete: res => {
 
-    //          console.log("hehehehe", res)
+               console.log("hehehehe", res)
 
-    //          const db = wx.cloud.database()
-    //          const _ = db.command
-    //          //查询云数据库有没有openId为当前登陆者的记录 如果有，则绑定过手机号
-    //          const tbUser = db.collection('tb_user').where({
-    //            wx_code: _.eq(res.result.openid)
-    //          }).get({
-    //            success: function (queryRes) {
-    //              if (queryRes.data == null || queryRes.data.length == 0) {
-    //                //没有查到用户什么都不处理
-    //              } else {
-    //                // isReister = true
-    //                // that.setData({
-    //                //   isReister: true
-    //                // })
-    //                // that.setData({
-    //                //   vipNo: res.result.data.phoneNumber
-    //                // })
-    //                // getApp().globalData.phone = res.result.data.phoneNumber
-    //                console.log("数据库查到用户了", queryRes.data[0])
-    //                getApp().globalData.sessionCode = queryRes.data[0].wx_code
-    //                getApp().globalData.dbId = queryRes.data[0]._id
-    //                getApp().globalData.phone = queryRes.data[0].mobile
-    //                getApp().globalData.userInfo = queryRes.data[0]
-    //                if (getApp().globalData.phone == null) {
-    //                  getApp().globalData.isVip = false
-    //                } else {
-    //                  console.log("手机号不为空哦")
-    //                  getApp().globalData.isVip = true
-    //                  //有手机号注册过 然后还经过这些场景值进来 直接去支付页面
-    //                  // wx.navigateTo({
-    //                  //   url: '../pay/pay'
-    //                  // })
-    //                }
-    //              }
-    //            }
-    //          })
-    //        }
-    //      })
-    //    },
-    //    fail() {
-    //      // session_key 已经失效，需要重新执行登录流程
-    //      wx.login({
-    //        success(res) {
-    //          if (res.code) {
-    //            console.log('app.js do wxlogin>>>', res)
-    //            getApp().globalData.sessionKeyCode = res.code
+               const db = wx.cloud.database()
+               const _ = db.command
+               //查询云数据库有没有openId为当前登陆者的记录 如果有，则绑定过手机号
+               const tbUser = db.collection('tb_user').where({
+                 wx_code: _.eq(res.result.openid)
+               }).get({
+                 success: function (queryRes) {
+                   if (queryRes.data == null || queryRes.data.length == 0) {
+                     //没有查到用户什么都不处理
+                     getApp().globalData.isVip = false
+                   } else {
+                     // isReister = true
+                     // that.setData({
+                     //   isReister: true
+                     // })
+                     // that.setData({
+                     //   vipNo: res.result.data.phoneNumber
+                     // })
+                     // getApp().globalData.phone = res.result.data.phoneNumber
+                     console.log("数据库查到用户了", queryRes.data[0])
+                     getApp().globalData.sessionCode = queryRes.data[0].wx_code
+                     getApp().globalData.dbId = queryRes.data[0]._id
+                     getApp().globalData.phone = queryRes.data[0].mobile
+                     getApp().globalData.userInfo = queryRes.data[0]
+                     if (getApp().globalData.phone == null) {
+                       getApp().globalData.isVip = false
+                     } else {
+                       console.log("手机号不为空哦")
+                       getApp().globalData.isVip = true
+                       //有手机号注册过 然后还经过这些场景值进来 直接去支付页面
+                       // wx.navigateTo({
+                       //   url: '../pay/pay'
+                       // })
+                     }
+                   }
+                 }
+               })
+             }
+           })
+       },
+       fail() {
+         // session_key 已经失效，需要重新执行登录流程
+         wx.login({
+           success(res) {
+             if (res.code) {
+               console.log('app.js do wxlogin>>>', res)
+               getApp().globalData.sessionKeyCode = res.code
 
-    //            wx.cloud.callFunction({
-    //              // 需调用的云函数名
-    //              name: 'login',
-    //              complete: res => {
+               wx.cloud.callFunction({
+                 // 需调用的云函数名
+                 name: 'login',
+                 complete: res => {
 
-    //                console.log("hehehehe", res)
+                   console.log("hehehehe", res)
 
-    //                const db = wx.cloud.database()
-    //                const _ = db.command
-    //                //查询云数据库有没有openId为当前登陆者的记录 如果有，则绑定过手机号
-    //                const tbUser = db.collection('tb_user').where({
-    //                  wx_code: _.eq(res.result.openid)
-    //                }).get({
-    //                  success: function (queryRes) {
-    //                    if (queryRes.data == null || queryRes.data.length == 0) {
-    //                      //没有查到用户什么都不处理
-    //                    } else {
-    //                      // isReister = true
-    //                      // that.setData({
-    //                      //   isReister: true
-    //                      // })
-    //                      // that.setData({
-    //                      //   vipNo: res.result.data.phoneNumber
-    //                      // })
-    //                      // getApp().globalData.phone = res.result.data.phoneNumber
-    //                      console.log("数据库查到用户了", queryRes.data[0])
-    //                      getApp().globalData.sessionCode = queryRes.data[0].wx_code
-    //                      getApp().globalData.dbId = queryRes.data[0]._id
-    //                      getApp().globalData.phone = queryRes.data[0].mobile
-    //                      getApp().globalData.userInfo = queryRes.data[0]
-    //                      if (getApp().globalData.phone == null) {
-    //                        getApp().globalData.isVip = false
-    //                      } else {
-    //                        getApp().globalData.isVip = true
-    //                        console.log("手机号不为空哦")
-    //                        //有手机号注册过 然后还经过这些场景值进来 直接去支付页面
-    //                        // wx.navigateTo({
-    //                        //   url: '../pay/pay'
-    //                        // })
-    //                      }
-    //                    }
-    //                  }
-    //                }
-    //                )
-    //              }
-    //            })
-
-
-
-
+                   const db = wx.cloud.database()
+                   const _ = db.command
+                   //查询云数据库有没有openId为当前登陆者的记录 如果有，则绑定过手机号
+                   const tbUser = db.collection('tb_user').where({
+                     wx_code: _.eq(res.result.openid)
+                   }).get({
+                     success: function (queryRes) {
+                       if (queryRes.data == null || queryRes.data.length == 0) {
+                         //没有查到用户什么都不处理
+                         getApp().globalData.isVip = false
+                       } else {
+                         // isReister = true
+                         // that.setData({
+                         //   isReister: true
+                         // })
+                         // that.setData({
+                         //   vipNo: res.result.data.phoneNumber
+                         // })
+                         // getApp().globalData.phone = res.result.data.phoneNumber
+                         console.log("数据库查到用户了", queryRes.data[0])
+                         getApp().globalData.sessionCode = queryRes.data[0].wx_code
+                         getApp().globalData.dbId = queryRes.data[0]._id
+                         getApp().globalData.phone = queryRes.data[0].mobile
+                         getApp().globalData.userInfo = queryRes.data[0]
+                         if (getApp().globalData.phone == null) {
+                           getApp().globalData.isVip = false
+                         } else {
+                           getApp().globalData.isVip = true
+                           console.log("手机号不为空哦")
+                           //有手机号注册过 然后还经过这些场景值进来 直接去支付页面
+                           // wx.navigateTo({
+                           //   url: '../pay/pay'
+                           // })
+                         }
+                       }
+                     }
+                   }
+                   )
+                 }
+               })
 
 
-    //          } else {
-    //            console.log('登录失败！' + res.errMsg)
-    //          }
-    //        }
-    //      })
-    //    }
-    //  })
+
+
+
+
+             } else {
+               console.log('登录失败！' + res.errMsg)
+             }
+           }
+         })
+       }
+     })
+
 
    },
 
@@ -312,8 +323,8 @@
      let that = this
      //需要上传给云函数的数据
      let uploadData = {
-       //此次需要支付的金额，单位是分。例如¥1.80=180
-       "total_fee":this.data.payMoney,
+       //此次需要支付的金额，单位是分。例如¥1.80=180 //this.data.payMoney,
+       "total_fee":1,
        //用户端的ip地址
        "spbill_create_ip": "123.123.123.123"
      }
@@ -343,7 +354,7 @@
          success: resn => {
            //支付成功
            this.setData({
-             source: this.data.payMoney
+             source: Math.floor(this.data.payMoney/10)
            }),
            this.setData({
              modalName: 'PaySucDialog'
@@ -357,7 +368,7 @@
              
                // res.data 包含该记录的数据
                console.log("查询更新积分",res)
-               const newSource = res.data.source + that.data.payMoney
+               const newSource = res.data.source + Math.floor(that.data.payMoney/10)
                console.log("新积分", newSource)
                db.collection('tb_user').doc(getApp().globalData.dbId).update({
                  // data 传入需要局部更新的数据
